@@ -156,4 +156,4 @@ logbook doesn't capture every code change or design tweak. it's not a git log. i
 
 ---
 
-built by [your name] · made for the Claude Code ecosystem · [your twitter/x or site]
+built by [Pournami Pottekat](https://www.pournami.work/) · made for the Claude Code ecosystem · [twitter/x](https://x.com/Poro090)
