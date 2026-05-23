@@ -41,25 +41,26 @@ Don't log every small code choice. Log the moments that shaped the thing.
 
 ## Initialization (first use only)
 
-Before logging anything, check if `docs/logbook/` exists. If it doesn't:
+Before logging anything, check if `docs/logbook/` exists. If it doesn't, run initialization.
 
-1. Ask the user for the project name and a one-sentence description of what they're building and who it's for
-2. Ask: "Is there anything you want me to always capture when you log a decision? (e.g., constraints, timeline pressure, tools used)"
-3. Create the directory structure and seed a `PROJECT.md` with that context
-4. Confirm before creating any files
+### Step 0: Detect whether this is a new or mid-project install
 
-Directory structure to create:
-```
-docs/
-└── logbook/
-    ├── PROJECT.md          ← project context, seeded at init
-    ├── LOGBOOK.md          ← master log, seeded at init, updated each time
-    ├── CASE_STUDY_SEED.md  ← generated on export request, not created at init
-    └── decisions/
-        └── 001-[slug].md   ← individual decision files, created as entries are logged
-```
+First, ask one question:
 
-Seed `LOGBOOK.md` at initialization with this structure:
+> "Is this a new project or are you adding logbook to something you've already been building?"
+
+**If new project → run new project flow.**
+**If mid-project → run mid-project flow.**
+
+---
+
+### New project flow
+
+1. Ask: "What's the project called, and in one sentence — what are you building and who's it for?"
+2. Ask: "Is there anything you always want me to capture when logging a decision? (e.g., time pressure, tools used, which AI helped)"
+3. Confirm before creating files, then create the directory structure and seed `PROJECT.md` and `LOGBOOK.md`
+
+Seed `LOGBOOK.md` with:
 
 ```markdown
 # Logbook — [PROJECT NAME]
@@ -72,6 +73,68 @@ Started: YYYY-MM-DD
 
 ---
 *No entries yet. Start building — decisions will appear here as you log them.*
+```
+
+---
+
+### Mid-project flow
+
+The builder has history that logbook doesn't know about. Collect enough context to make future entries and the eventual case study seed meaningful.
+
+Ask questions one at a time — never as a list. There are two tiers:
+
+**Required — always ask these, no skipping:**
+1. "What's the project called, and what are you building and who's it for?"
+2. "How far in are you — early stages, mid-build, or close to shipping?"
+
+**Optional — ask these after the required ones, but make clear they can skip:**
+3. "What are the 2-3 biggest decisions you've made so far? Skip this if you'd rather just start logging from here."
+4. "Anything you tried and dropped that's worth remembering? Or skip."
+5. "Any constraints that shaped the project — time, tech, scope? Or skip."
+
+Once the required questions are answered, logbook starts its normal passive capture immediately — no further setup needed. If they skipped questions 3, 4, or 5, note in `PROJECT.md` that pre-logbook history was not captured and move on. Do not circle back to skipped questions.
+
+After collecting answers, do two things before creating any files:
+
+**A. Backfill a context block in `PROJECT.md`**
+Write a `## Before logbook` section that summarises what you learned from their answers — the project status, key decisions already made, dropped directions, and constraints. This is not a decision log entry. It's context that future entries and the case study seed will draw from.
+
+**B. Offer to log backdated entries**
+Say:
+
+> "I can log those past decisions as backdated entries so your logbook has a complete picture — or we can start fresh from today. Which do you prefer?"
+
+If they want backdated entries: write one decision file per major decision they mentioned, using the date they estimate it happened (or today's date with a note that it's backdated). Add a `[backdated]` tag to each entry in `LOGBOOK.md` so it's clear these were captured retrospectively, not in real time.
+
+If they want to start fresh: skip backdated entries, note in `PROJECT.md` that logbook was installed mid-project, and begin logging from this session forward.
+
+Seed `LOGBOOK.md` with:
+
+```markdown
+# Logbook — [PROJECT NAME]
+Started: YYYY-MM-DD (logbook installed mid-project)
+
+---
+
+| # | Date | Title | Summary |
+|---|------|-------|---------|
+
+---
+*Logbook installed mid-project. Context captured in PROJECT.md → Before logbook section.*
+```
+
+---
+
+### Directory structure to create (both flows)
+
+```
+docs/
+└── logbook/
+    ├── PROJECT.md          ← project context, seeded at init
+    ├── LOGBOOK.md          ← master log, seeded at init, updated each time
+    ├── CASE_STUDY_SEED.md  ← generated on export request, not created at init
+    └── decisions/
+        └── 001-[slug].md   ← individual decision files, created as entries are logged
 ```
 
 Do not create `CASE_STUDY_SEED.md` at init — it is generated on demand only.
