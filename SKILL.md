@@ -125,6 +125,51 @@ Started: YYYY-MM-DD (logbook installed mid-project)
 
 ---
 
+### Git visibility — ask this for both flows before creating any files
+
+After collecting the project context but before writing anything to disk, ask:
+
+> "One last thing — your logbook will live in `docs/logbook/`. How do you want to handle it with git?
+>
+> **1. Keep it private (recommended)**
+> Your raw decision files and project context stay local — never pushed to GitHub. Only the summary log (`LOGBOOK.md`) and case study seed (`CASE_STUDY_SEED.md`) are tracked. Best if your repo is public, you work with clients, or you'd rather keep your raw thinking to yourself.
+>
+> **2. Track outputs only**
+> Nothing in `docs/logbook/` is pushed — not even the summary or case study seed. The entire logbook stays on your machine. Best if you want full privacy or plan to export manually.
+>
+> **3. Push everything**
+> The full logbook — raw entries, project context, summary, and case study seed — is tracked and pushed with your code. Best if you're building in public or want the log version-controlled alongside the codebase.
+>
+> Which do you prefer? (1, 2, or 3)"
+
+Wait for their answer, then write the appropriate `.gitignore` entries before creating any logbook files.
+
+**If they choose 1 (keep it private — recommended):**
+Add to `.gitignore`:
+```
+# logbook — raw entries stay local
+docs/logbook/decisions/
+docs/logbook/PROJECT.md
+```
+`LOGBOOK.md` and `CASE_STUDY_SEED.md` remain tracked.
+
+**If they choose 2 (track outputs only):**
+Add to `.gitignore`:
+```
+# logbook — full log stays local
+docs/logbook/
+```
+
+**If they choose 3 (push everything):**
+Do not add anything to `.gitignore`. Note in `PROJECT.md` that the full logbook is tracked publicly.
+
+After writing the `.gitignore` entries, confirm what was set:
+> "Got it — [explain what will and won't be pushed in plain language]. You can change this anytime by editing `.gitignore`."
+
+Then proceed to create the logbook files.
+
+---
+
 ### Directory structure to create (both flows)
 
 ```
