@@ -57,19 +57,18 @@ then install logbook globally so it's available in every project you work on:
 npx skills add yourname/logbook --skill logbook --agent claude-code
 ```
 
-then add the always-on instructions to your project's `CLAUDE.md`:
+then register the `/logbook` slash command and add the always-on watcher:
 
 ```bash
-# if you don't have a CLAUDE.md yet
-cp ~/.claude/skills/logbook/LOGBOOK_CLAUDE.md ./CLAUDE.md
+# register /logbook as a slash command
+mkdir -p .claude/commands
+cp ~/.claude/skills/logbook/commands/logbook.md .claude/commands/logbook.md
 
-# if you already have a CLAUDE.md
+# add passive always-on watcher to your project
 cat ~/.claude/skills/logbook/LOGBOOK_CLAUDE.md >> ./CLAUDE.md
 ```
 
-that's the file that makes logbook always-on. without it, you'd have to manually trigger logging every time. with it, Claude watches passively and surfaces a prompt when something worth capturing happens.
-
-**important:** do not replace an existing `CLAUDE.md` — always append to it.
+the first command makes `/logbook` work as a slash command inside Claude Code. the second makes logbook run passively in the background all session — no slash command needed. both are needed for the full experience.
 
 ---
 
